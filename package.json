@@ -1,0 +1,22 @@
+{
+  "name": "react-setup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philipyoo/react-setup.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/philipyoo/react-setup/issues"
+  },
+  "homepage": "https://github.com/philipyoo/react-setup#readme",
+  "devDependencies": {
+    "webpack": "^3.4.1"
+  }
+}
