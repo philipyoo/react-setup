@@ -1,9 +1,10 @@
 {
   "name": "react-setup",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A light-weight react/webpack setup",
+  "main": "src/index.js",
   "scripts": {
+    "start": "node static/index.bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +18,13 @@
   },
   "homepage": "https://github.com/philipyoo/react-setup#readme",
   "devDependencies": {
-    "webpack": "^3.4.1"
+    "babel-loader": "^7.1.1",
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.6.1",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   }
 }
