@@ -1,6 +1,22 @@
 const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+/*
+Notes:
+- ExtractTextPlugin: Moves all required *.css modules in entry chunks
+    into a separate CSS file. So your styles are no longer inlined into
+    the JS bundle, but in a separate CSS file (styles.css). If your total
+    stylesheet volume is big, it will be faster because the CSS bundle is
+    loaded in parallel to the JS bundle.
+- nodeExternals: When bundling with Webpack for the backend, you usually
+    don't want to bundle its node_modules dependencies. This library
+    creates an externals function that ignores node_modules when bundling
+    in Webpack.
+- UglifyJsPlugin: Minimize all JS output of chunks. Loaders are switched
+    into minimizing mode.
+*/
 
 module.exports = {
     entry: './src/index.jsx',
@@ -16,26 +32,13 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.html$/,
-                
-            },
-            {
                 test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ]
-            }
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader'
+                })
+            },
         ]
-        // loaders: [
-        //     {
-        //         exclude: /node_modules/,
-        //         loader: 'babel-loader',
-        //         query: {
-        //             presets: ['es2015', 'react'],
-        //         }
-        //     }
-        // ]
     },
     externals: [nodeExternals()],
     plugins: [
@@ -46,7 +49,7 @@ module.exports = {
             output: {
                 comments: false
             }
-        })
+        }),
+        new ExtractTextPlugin('styles.css')
     ]
-
 }
