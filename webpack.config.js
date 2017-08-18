@@ -1,23 +1,41 @@
 const path = require('path');
-const webpath = require('webpack');
+const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/index.jsx',
     output: {
         filename: 'index.bundle.js',
         path: path.resolve(__dirname, 'static'),
     },
     module: {
-        loaders: [
+        rules: [
             {
-                exclude: /node_modules/,
+                test: /\.js$/,
                 loader: 'babel-loader',
-                query: {
-                    presets: ['es2015', 'react'],
-                }
+                exclude: /node_modules/
+            },
+            {
+                test: /\.html$/,
+                
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
             }
         ]
+        // loaders: [
+        //     {
+        //         exclude: /node_modules/,
+        //         loader: 'babel-loader',
+        //         query: {
+        //             presets: ['es2015', 'react'],
+        //         }
+        //     }
+        // ]
     },
     externals: [nodeExternals()],
     plugins: [
